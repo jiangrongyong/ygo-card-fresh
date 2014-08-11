@@ -53,7 +53,7 @@ class SurugaCommand extends Command {
             }
         }
 
-        Mail::send('emails.suruga', compact('notifications'), function ($message) {
+        Mail::send('emails.suruga.index', compact('notifications'), function ($message) {
             $message->to('jiangrongyong@gmail.com', 'Hugh')->subject('Suruga Updates');
         });
     }
