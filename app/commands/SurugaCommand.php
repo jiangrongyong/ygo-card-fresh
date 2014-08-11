@@ -3,6 +3,7 @@
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
+use Goutte\Client;
 
 class SurugaCommand extends Command {
 
@@ -35,8 +36,11 @@ class SurugaCommand extends Command {
      * @return mixed
      */
     public function fire() {
-        echo 'test';
-        //
+        $client = new Client();
+        $crawler = $client->request('GET', 'http://www.suruga-ya.jp/search?category=501080040&inStock=Off&search_word=G7+UR');
+        $crawler->filter('table .text2 .link')->each(function ($node) {
+            print $node->attr('href') . "\n";
+        });
     }
 
     /**
