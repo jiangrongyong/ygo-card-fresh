@@ -39,14 +39,23 @@ class SurugaCommand extends Command {
         $client = new Client();
 
         $jobs = Job::get();
+        $notifications = [];
         foreach ($jobs as $job) {
             $crawler = $client->request('GET', $job->url);
             $node = $crawler->filter('table .text2 .link')->eq(0);
 
             $link = $node->attr('href');
-            $job->last_name = $link;
-            $job->save();
+            if ($link !== $job->last_name) {
+                $job->last_name = $link;
+                $job->save();
+
+                $notifications[] = $job;
+            }
         }
+
+        Mail::send('emails.suruga', compact('notifications'), function ($message) {
+            $message->to('jiangrongyong@gmail.com', 'Hugh')->subject('Suruga Updates');
+        });
     }
 
     /**
