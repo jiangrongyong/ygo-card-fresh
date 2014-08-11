@@ -53,9 +53,11 @@ class SurugaCommand extends Command {
             }
         }
 
-        Mail::send('emails.suruga.index', compact('notifications'), function ($message) {
-            $message->to('jiangrongyong@gmail.com', 'Hugh')->subject('Suruga Updates');
-        });
+        if (count($notifications) !== 0) {
+            Mail::send('emails.suruga.index', compact('notifications'), function ($message) {
+                $message->to('jiangrongyong@gmail.com', 'Hugh')->subject('Suruga Updates');
+            });
+        }
     }
 
     /**
