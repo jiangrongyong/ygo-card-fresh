@@ -24,7 +24,7 @@ class SurugaCommand extends Command {
     /**
      * Create a new command instance.
      *
-     * @return void
+     * @return \SurugaCommand
      */
     public function __construct() {
         parent::__construct();
@@ -37,10 +37,16 @@ class SurugaCommand extends Command {
      */
     public function fire() {
         $client = new Client();
-        $crawler = $client->request('GET', 'http://www.suruga-ya.jp/search?category=501080040&inStock=Off&search_word=G7+UR');
-        $crawler->filter('table .text2 .link')->each(function ($node) {
-            print $node->attr('href') . "\n";
-        });
+
+        $jobs = Job::get();
+        foreach ($jobs as $job) {
+            $crawler = $client->request('GET', $job->url);
+            $crawler->filter('table .text2 .link:first')->each(function ($node) use ($job) {
+                $link = $node->attr('href');
+                $job->last_name = $link;
+                $job->save();
+            });
+        }
     }
 
     /**
