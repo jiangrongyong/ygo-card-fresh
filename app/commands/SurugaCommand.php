@@ -41,15 +41,18 @@ class SurugaCommand extends Command {
         $jobs = Job::get();
         $notifications = [];
         foreach ($jobs as $job) {
-            $crawler = $client->request('GET', $job->url);
-            $node = $crawler->filter('table .text2 .link')->eq(0);
+            try {
+                $crawler = $client->request('GET', $job->url);
+                $node = $crawler->filter('table .text2 .link')->eq(0);
 
-            $link = $node->attr('href');
-            if ($link !== $job->last_name) {
-                $job->last_name = $link;
-                $job->save();
+                $link = $node->attr('href');
+                if ($link !== $job->last_name) {
+                    $job->last_name = $link;
+                    $job->save();
 
-                $notifications[] = $job;
+                    $notifications[] = $job;
+                }
+            } catch (Exception $e) {
             }
         }
 
