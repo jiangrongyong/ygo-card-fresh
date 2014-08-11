@@ -41,7 +41,6 @@ class SurugaCommand extends Command {
         $jobs = Job::get();
         foreach ($jobs as $job) {
             $crawler = $client->request('GET', $job->url);
-            dd($crawler);
             $crawler->filter('table .text2 > .link')->each(function ($node) use ($job) {
                 $link = $node->attr('href');
                 $job->last_name = $link;
