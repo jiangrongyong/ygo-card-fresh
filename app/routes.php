@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
+Route::get('/', function () {
+    return Redirect::route('jobs.index');
 });
+
+Route::resource('jobs', 'JobsController');
