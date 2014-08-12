@@ -55,6 +55,8 @@ class SurugaCommand extends Command {
             } catch (Exception $e) {
             }
         }
+        
+        //test....
 
         Log::info('Suruga check.');
         if (count($notifications) !== 0) {
