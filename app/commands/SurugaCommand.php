@@ -56,7 +56,8 @@ class SurugaCommand extends Command {
             }
         }
         
-        //test....
+        //test....job->last_count
+        //#main2 > p
 
         Log::info('Suruga check.');
         if (count($notifications) !== 0) {
