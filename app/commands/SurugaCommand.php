@@ -46,9 +46,9 @@ class SurugaCommand extends Command {
                 $node = $crawler->filter('table .text2 .link')->eq(0);
                 
                 $ptext = $crawler->filter('#main2>p')->text();
-                preg_match('/[0-9]+/', $ptext, $count);
+                //preg_match('/[0-9]+/', $ptext, $count);
                 //$count = $crawler->filter('#main2>p')->text();
-                Log::info('count:' . $count);
+                Log::info('count:' . $ptext);
                 //Log::info($count);
 
                 $link = $node->attr('href');
