@@ -44,6 +44,10 @@ class SurugaCommand extends Command {
             try {
                 $crawler = $client->request('GET', $job->url);
                 $node = $crawler->filter('table .text2 .link')->eq(0);
+                
+                $count = $crawler->filter('#main2>p');
+                Log::info('count:');
+                Log::info($count);
 
                 $link = $node->attr('href');
                 if ($link !== $job->last_name) {
