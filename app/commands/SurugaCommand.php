@@ -53,7 +53,7 @@ class SurugaCommand extends Command {
                 }else{
                     $count = substr($ptext,13,1);
                 }
-                Log::info('count:' . $count);
+                //Log::info('count:' . $count);
                 
                 $link = $node->attr('href');
                 if ($link !== $job->last_name || $count !== $job->last_count) {
