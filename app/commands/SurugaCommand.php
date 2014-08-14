@@ -49,9 +49,9 @@ class SurugaCommand extends Command {
                 //preg_match('/[0-9]+/', $ptext, $count);
                 //$count = $crawler->filter('#main2>p')->text();
                 $count = substr($ptext,13,1);
-                if (is_numeric($count)) {
+                if (!is_numeric($count)) {
+                    $count = 0;
                     Log::info('count:' . $count);
-                    //$count = 0; 
                 }
                 //Log::info('count:' . $count);
                 
