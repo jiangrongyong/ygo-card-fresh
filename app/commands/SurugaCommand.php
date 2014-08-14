@@ -48,12 +48,14 @@ class SurugaCommand extends Command {
                 $ptext = $crawler->filter('#main2>p')->text();
                 //preg_match('/[0-9]+/', $ptext, $count);
                 //$count = $crawler->filter('#main2>p')->text();
-                $count = substr($ptext,13,1);
-                if (!is_numeric($count)) {
+                if(strlen($ptext) == 0){
                     $count = 0;
-                    Log::info('count:' . $count);
+                    //Log::info('count:' . $count);
+                }else{
+                    $count = substr($ptext,13,1);
                 }
-                //Log::info('count:' . $count);
+                
+                Log::info('count:' . $count);
                 
                 $link = $node->attr('href');
                 if ($link !== $job->last_name || $count !== $job->last_count) {
