@@ -44,30 +44,30 @@ class SurugaCommand extends Command {
             try {
                 $crawler = $client->request('GET', $job->url);
                 $node = $crawler->filter('table .text2 .link')->eq(0);
-                
+
                 $ptext = $crawler->filter('#main2>p')->text();
                 //preg_match('/[0-9]+/', $ptext, $count);
                 //$count = $crawler->filter('#main2>p')->text();
-                if(strlen($ptext) == 0){
+                if (strlen($ptext) == 0) {
                     $count = 0;
-                }else{
-                    $count = substr($ptext,13,1);
+                } else {
+                    $count = substr($ptext, 13, 1);
                 }
                 //Log::info('count:' . $count);
-                
+
                 $link = $node->attr('href');
                 if ($link !== $job->last_name || $count !== $job->last_count) {
                     $job->last_name = $link;
                     $job->last_count = $count;
                     $job->save();
-                    
+
                     $notifications[] = $job;
                 }
-                
+
             } catch (Exception $e) {
             }
         }
-        
+
         //test....job->last_count
         //#main2 > p
 
