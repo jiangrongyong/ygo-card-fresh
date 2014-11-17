@@ -5,7 +5,8 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-        "fabpot/goutte": "2.0.*@dev"
+        	"fabpot/goutte": "2.0.*@dev",
+        	"indatus/dispatcher": "1.*"
 	},
 	"autoload": {
 		"classmap": [

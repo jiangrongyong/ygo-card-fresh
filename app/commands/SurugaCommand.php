@@ -4,8 +4,10 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Goutte\Client;
+use Indatus\Dispatcher\Scheduling\ScheduledCommand;
+use Indatus\Dispatcher\Scheduling\Schedulable;
 
-class SurugaCommand extends Command {
+class SurugaCommand extends ScheduledCommand {
 
     /**
      * The console command name.
@@ -28,6 +30,10 @@ class SurugaCommand extends Command {
      */
     public function __construct() {
         parent::__construct();
+    }
+
+    public function schedule(Schedulable $scheduler) {
+        return $scheduler->everyMinutes(5);
     }
 
     /**
